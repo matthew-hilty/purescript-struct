@@ -1,0 +1,29 @@
+{
+  "name": "purescript-struct",
+  "homepage": "https://github.com/matthew-hilty/purescript-struct",
+  "authors": [
+    "Matthew Hilty <hilty.matthew+purescript@gmail.com>"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/matthew-hilty/purescript-struct.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-prelude": "^4.1.0",
+    "purescript-record": "^2.0.0",
+    "purescript-record-extra": "^2.0.0",
+    "purescript-subcategory": "^0.1.0",
+    "purescript-typelevel-prelude": "^4.0.2",
+    "purescript-variant": "^6.0.0"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^4.0.0"
+  }
+}
