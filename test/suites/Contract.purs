@@ -11,7 +11,7 @@ import Test.Unit.Assert (shouldEqual)
 
 suites :: TestSuite
 suites =
-  suite "Contract" do
+  suite "contract" do
     suite "Builder" do
       test "#0" do
         let input = {}

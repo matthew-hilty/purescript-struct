@@ -176,7 +176,6 @@ let additions =
         ]
         "https://github.com/matthew-hilty/purescript-subcategory.git"
         "v0.1.0"
-
   , typelevel-eval =
       mkPackage
         [ "prelude"

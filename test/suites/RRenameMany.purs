@@ -22,7 +22,7 @@ foreign import foreignValue :: Json
 
 suites :: TestSuite
 suites =
-  suite "RenameMany" do
+  suite "rrenameMany" do
 
     test "#0" do
       let value = {}
