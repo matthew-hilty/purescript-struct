@@ -3,14 +3,19 @@ module Data.Struct.RInsert
   , rinsert
   ) where
 
-import Data.Symbol (class IsSymbol, SProxy)
+import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Data.Variant (Variant)
 import Data.Variant (inj) as Variant
 import Record (insert) as Record
 import Record.Builder (Builder)
 import Record.Builder (insert) as Builder
-import Type.Row (class Cons, class Lacks, RProxy(RProxy), kind RowList)
-import Type.Row (RLProxy) as TypeRow
+import Type.Proxying
+  ( class RLProxying
+  , class RProxying
+  , class SProxying
+  , rProxy
+  )
+import Type.Row (class Cons, class Lacks, kind RowList)
 
 class RInsert
   (p  :: Type -> Type -> Type)
@@ -25,34 +30,43 @@ class RInsert
   , l1 -> r1
   where
   rinsert
-    :: forall v
+    :: forall h v
      . Cons s v r0 r1
     => Lacks s r0
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    => RLProxying h l0
+    => RLProxying h l1
+    => h l0
+    -> h l1
     -> g s
     -> v
     -> p (f r0) (f r1)
 
 instance rinsertBuilder
-  :: IsSymbol s
-  => RInsert Builder Record SProxy s l0 r0 l1 r1
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RInsert Builder Record g s l0 r0 l1 r1
   where
-  rinsert _ _ = Builder.insert
+  rinsert _ _ _ = Builder.insert (SProxy :: SProxy s)
 
 instance rinsertRecord
-  :: IsSymbol s
-  => RInsert Function Record SProxy s l0 r0 l1 r1
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RInsert Function Record g s l0 r0 l1 r1
   where
-  rinsert _ _ = Record.insert
+  rinsert _ _ _ = Record.insert (SProxy :: SProxy s)
 
-instance rinsertRProxy
-  :: RInsert Function RProxy g s l0 r0 l1 r1
+else instance rinsertVariant
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RInsert Function Variant g s l0 r0 l1 r1
   where
-  rinsert _ _ _ _ _ = RProxy
+  rinsert _ _ _ v _ = Variant.inj (SProxy :: SProxy s) v
 
-instance rinsertVariant
-  :: IsSymbol s
-  => RInsert Function Variant SProxy s l0 r0 l1 r1
+else instance rinsertRProxying
+  :: RProxying f r1
+  => RInsert Function f g s l0 r0 l1 r1
   where
-  rinsert _ _ s v _ = Variant.inj s v
+  rinsert _ _ _ _ _ = rProxy

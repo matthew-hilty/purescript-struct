@@ -3,14 +3,19 @@ module Data.Struct.RRename
   , rrename
   ) where
 
-import Data.Symbol (class IsSymbol, SProxy)
+import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Data.Variant (Variant)
 import Data.Variant (inj, on) as Variant
 import Record (rename) as Record
 import Record.Builder (Builder)
 import Record.Builder (rename) as Builder
-import Type.Row (class Cons, class Lacks, RProxy(RProxy), kind RowList)
-import Type.Row (RLProxy) as TypeRow
+import Type.Proxying
+  ( class RLProxying
+  , class RProxying
+  , class SProxying
+  , rProxy
+  )
+import Type.Row (class Cons, class Lacks, kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RRename
@@ -27,15 +32,17 @@ class RRename
   , l1 -> r1
   where
   rrename
-    :: forall r v
+    :: forall h r v
      . Cons s0 v r r0
     => Cons s1 v r r1
     => Lacks s0 r
     => Lacks s0 r1
     => Lacks s1 r
     => Lacks s1 r0
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    => RLProxying h l0
+    => RLProxying h l1
+    => h l0
+    -> h l1
     -> g s0
     -> g s1
     -> p (f r0) (f r1)
@@ -43,27 +50,45 @@ class RRename
 instance rrenameBuilder
   :: ( IsSymbol s0
      , IsSymbol s1
+     , SProxying g s0
+     , SProxying g s1
      )
-  => RRename Builder Record SProxy s0 s1 l0 r0 l1 r1 where
-  rrename _ _ = Builder.rename
+  => RRename Builder Record g s0 s1 l0 r0 l1 r1
+  where
+  rrename _ _ _ _ =
+    Builder.rename
+      (SProxy :: SProxy s0)
+      (SProxy :: SProxy s1)
 
 instance rrenameRecord
   :: ( IsSymbol s0
      , IsSymbol s1
+     , SProxying g s0
+     , SProxying g s1
      )
-  => RRename Function Record SProxy s0 s1 l0 r0 l1 r1 where
-  rrename _ _ = Record.rename
+  => RRename Function Record g s0 s1 l0 r0 l1 r1
+  where
+  rrename _ _ _ _ =
+    Record.rename
+      (SProxy :: SProxy s0)
+      (SProxy :: SProxy s1)
 
-instance rrenameRProxy :: RRename Function RProxy g s0 s1 l0 r0 l1 r1 where
-  rrename _ _ _ _ _ = RProxy
-
-instance rrenameVariant
+else instance rrenameVariant
   :: ( IsSymbol s0
      , IsSymbol s1
+     , SProxying g s0
+     , SProxying g s1
      )
-  => RRename Function Variant SProxy s0 s1 l0 r0 l1 r1 where
-  rrename _ _ s0 s1 =
+  => RRename Function Variant g s0 s1 l0 r0 l1 r1
+  where
+  rrename _ _ _ _ =
     Variant.on
-      s0
-      (Variant.inj s1)
+      (SProxy :: SProxy s0)
+      (Variant.inj (SProxy :: SProxy s1))
       unsafeCoerce
+
+else instance rrenameRProxying
+  :: RProxying f r1
+  => RRename Function f g s0 s1 l0 r0 l1 r1
+  where
+  rrename _ _ _ _ _ = rProxy

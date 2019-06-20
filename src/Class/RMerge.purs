@@ -6,8 +6,8 @@ module Data.Struct.RMerge
 import Record (merge) as Record
 import Record.Builder (Builder)
 import Record.Builder (merge) as Builder
+import Type.Proxying (class RLProxying)
 import Type.Row (class Nub, class Union, RProxy(RProxy), kind RowList)
-import Type.Row (RLProxy) as TypeRow
 
 class RMerge
   (p  :: Type -> Type -> Type)
@@ -23,12 +23,15 @@ class RMerge
   , l2 -> r2
   where
   rmerge
-    :: forall r3
+    :: forall h r3
      . Nub r2 r3
+    => RLProxying h l0
+    => RLProxying h l1
+    => RLProxying h l2
     => Union r0 r1 r2
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
-    -> TypeRow.RLProxy l2
+    => h l0
+    -> h l1
+    -> h l2
     -> f r0
     -> p (f r1) (f r3)
 

@@ -5,7 +5,8 @@ module Data.Struct.RContract
 
 import Data.Struct.Contract.GContract (class GContract)
 import Data.Struct.Contract.GContract (gContract) as Contract
-import Type.Row (class RowToList, class Union, RProxy(RProxy), kind RowList)
+import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Row (class RowToList, class Union, kind RowList)
 import Type.Row (RLProxy(RLProxy)) as TypeRow
 
 class RContract
@@ -19,10 +20,12 @@ class RContract
   , l1 -> r1
   where
   rcontract
-    :: forall r
-     . Union r1 r r0
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    :: forall g r
+     . RLProxying g l0
+    => RLProxying g l1
+    => Union r1 r r0
+    => g l0
+    -> g l1
     -> p (f r0) (f r1)
 
 instance rcontractRecord
@@ -32,9 +35,13 @@ instance rcontractRecord
      )
   => RContract p Record l1 r1 l2 r2
   where
-  rcontract =
+  rcontract _ _ =
     Contract.gContract
       (TypeRow.RLProxy :: TypeRow.RLProxy l0)
+      (TypeRow.RLProxy :: TypeRow.RLProxy l1)
+      (TypeRow.RLProxy :: TypeRow.RLProxy l2)
 
-instance rcontractRProxy :: RContract Function RProxy l0 r0 l1 r1 where
-  rcontract _ _ _ = RProxy
+else instance rcontractRProxying
+  :: RProxying f r1
+  => RContract Function f l0 r0 l1 r1 where
+  rcontract _ _ _ = rProxy

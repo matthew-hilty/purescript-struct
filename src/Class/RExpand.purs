@@ -5,8 +5,8 @@ module Data.Struct.RExpand
 
 import Data.Variant (Variant)
 import Data.Variant (expand) as Variant
-import Type.Row (class Union, RProxy(RProxy), kind RowList)
-import Type.Row (RLProxy) as TypeRow
+import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Row (class Union, kind RowList)
 
 class RExpand
   (p  :: Type -> Type -> Type)
@@ -19,14 +19,18 @@ class RExpand
   , l1 -> r1
   where
   rexpand
-    :: forall r
-     . Union r0 r r1
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    :: forall g r
+     . RLProxying g l0
+    => RLProxying g l1
+    => Union r0 r r1
+    => g l0
+    -> g l1
     -> p (f r0) (f r1)
-
-instance rexpandRProxy :: RExpand Function RProxy l0 r0 l1 r1 where
-  rexpand _ _ _ = RProxy
 
 instance rexpandVariant :: RExpand Function Variant l0 r0 l1 r1 where
   rexpand _ _ = Variant.expand
+
+else instance rexpandRProxying
+  :: RProxying f r1
+  => RExpand Function f l0 r0 l1 r1 where
+  rexpand _ _ _ = rProxy

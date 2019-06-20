@@ -12,7 +12,7 @@ import Type.Data.Boolean
   , True
   , kind Boolean
   )
-import Type.Data.RowList (RLProxy) -- Argonaut dependency
+import Type.Data.RowList (RLProxy)
 import Type.Data.Symbol (class Equals)
 import Type.Row (Cons, Nil, kind RowList)
 

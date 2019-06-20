@@ -15,12 +15,8 @@ import Data.Struct.Utils.ReifyKeyAndValueSymbols
   )
 import Data.Tuple (Tuple)
 import Record.Builder (Builder)
-import Type.Row
-  ( class ListToRow
-  , class RowToList
-  , RProxy(RProxy)
-  , kind RowList
-  )
+import Type.Proxying (class RProxying, rProxy)
+import Type.Row (class ListToRow, class RowToList, kind RowList)
 
 class RRenameMany
   (p  :: Type -> Type -> Type)
@@ -67,10 +63,11 @@ instance rrenameManyFunction
     where
     nameChanges' = fromFoldable $ reifyKeyAndValueSymbols nameChanges
 
-instance rrenameManyRProxy
-  :: RRenameMany Function RProxy g l0 r0 l1 r1 l2 r2
+else instance rrenameManyRProxying
+  :: RProxying f r2
+  => RRenameMany Function f g l0 r0 l1 r1 l2 r2
   where
-  rrenameMany nameChanges _ = RProxy
+  rrenameMany nameChanges _ = rProxy
 
 foreign import unsafeRenameManyBuilder
   :: forall r0 r1

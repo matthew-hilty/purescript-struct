@@ -10,8 +10,8 @@ import Data.Variant (Variant)
 import Data.Variant (contract) as Variant
 import Data.Variant.Internal (class Contractable)
 import Record.Extra (class Keys, pick) as RecordExtra
-import Type.Row (class RowToList, class Union, RProxy(RProxy), kind RowList)
-import Type.Row (RLProxy) as TypeRow
+import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Row (class RowToList, class Union, kind RowList)
 
 class RContractOrAlt
   (p  :: Type -> Type -> Type)
@@ -24,11 +24,13 @@ class RContractOrAlt
   , l1 -> r1
   where
   rcontractOrAlt
-    :: forall h r
+    :: forall g h r
      . Alternative h
+    => RLProxying g l0
+    => RLProxying g l1
     => Union r1 r r0
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    => g l0
+    -> g l1
     -> p (f r0) (h (f r1))
 
 instance rcontractRecord
@@ -39,11 +41,13 @@ instance rcontractRecord
   where
   rcontractOrAlt _ _ record = pure $ RecordExtra.pick record
 
-instance rcontractRProxy :: RContractOrAlt Function RProxy l0 r0 l1 r1 where
-  rcontractOrAlt _ _ _ = pure RProxy
-
-instance rcontractVariant
+else instance rcontractVariant
   :: Contractable r0 r1
   => RContractOrAlt Function Variant l0 r0 l1 r1
   where
   rcontractOrAlt _ _ = Variant.contract
+
+else instance rcontractRProxying
+  :: RProxying f r1
+  => RContractOrAlt Function f l0 r0 l1 r1 where
+  rcontractOrAlt _ _ _ = pure rProxy

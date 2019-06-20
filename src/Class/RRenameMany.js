@@ -24,10 +24,9 @@ exports.unsafeRenameManyFunction = function (tuples, record) {
   for (var i = 0; i < count; i++) {
     var tuple = tuples[i];
     var oldKey = tuple.value0;
-    var value = result[oldKey];
-    delete result[value];
     var newKey = tuple.value1;
-    result[newKey] = value;
+    result[newKey] = result[oldKey];
+    delete result[oldKey];
   }
   return result;
 };

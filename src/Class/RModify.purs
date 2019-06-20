@@ -5,14 +5,19 @@ module Data.Struct.RModify
 
 import Prelude (identity, (<<<))
 
-import Data.Symbol (class IsSymbol, SProxy)
+import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Data.Variant (Variant)
 import Data.Variant (inj, on) as Variant
 import Record (modify) as Record
 import Record.Builder (Builder)
 import Record.Builder (modify) as Builder
-import Type.Row (class Cons, RProxy(RProxy), kind RowList)
-import Type.Row (RLProxy) as TypeRow
+import Type.Proxying
+  ( class RLProxying
+  , class RProxying
+  , class SProxying
+  , rProxy
+  )
+import Type.Row (class Cons, kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RModify
@@ -28,36 +33,47 @@ class RModify
   , l1 -> r1
   where
   rmodify
-    :: forall r v0 v1
+    :: forall h r v0 v1
      . Cons s v0 r r0
+    => RLProxying h l0
+    => RLProxying h l1
     => Cons s v1 r r1
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    => h l0
+    -> h l1
     -> g s
     -> (v0 -> v1)
     -> p (f r0) (f r1)
 
 instance rmodifyBuilder
-  :: IsSymbol s
-  => RModify Builder Record SProxy s l0 r0 l1 r1
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RModify Builder Record g s l0 r0 l1 r1
   where
-  rmodify _ _ = Builder.modify
+  rmodify _ _ _ = Builder.modify (SProxy :: SProxy s)
 
 instance rmodifyRecord
-  :: IsSymbol s
-  => RModify Function Record SProxy s l0 r0 l1 r1
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RModify Function Record g s l0 r0 l1 r1
   where
-  rmodify _ _ = Record.modify
+  rmodify _ _ _ = Record.modify (SProxy :: SProxy s)
 
-instance rmodifyRProxy :: RModify Function RProxy g s l0 r0 l1 r1 where
-  rmodify _ _ _ _ _ = RProxy
-
-instance rmodifyVariant
-  ::  IsSymbol s
-  => RModify Function Variant SProxy s l0 r0 l1 r1
+else instance rmodifyVariant
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RModify Function Variant g s l0 r0 l1 r1
   where
-  rmodify _ _ s f =
+  rmodify _ _ _ f =
     Variant.on
-      s
-      (Variant.inj s <<< f)
+      (SProxy :: SProxy s)
+      (Variant.inj (SProxy :: SProxy s) <<< f)
       (unsafeCoerce <<< identity)
+
+else instance rmodifyRProxying
+  :: RProxying f r1
+  => RModify Function f g s l0 r0 l1 r1
+  where
+  rmodify _ _ _ _ _ = rProxy

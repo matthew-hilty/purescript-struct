@@ -2,14 +2,16 @@ module Data.Struct.Utils.Record
   ( singleton
   ) where
 
-import Data.Symbol (class IsSymbol, SProxy, reflectSymbol)
+import Data.Symbol (class IsSymbol)
+import Type.Proxying (class SProxying, reflectSymbol)
 import Type.Row (class ListToRow, Cons, Nil)
 
 singleton
-  :: forall r s v
+  :: forall f r s v
    . IsSymbol s
   => ListToRow (Cons s v Nil) r
-  => SProxy s
+  => SProxying f s
+  => f s
   -> v
   -> Record r
 singleton sProxy value =

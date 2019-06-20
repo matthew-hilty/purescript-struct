@@ -3,15 +3,15 @@ module Data.Struct.RGetOrAlt
   , rgetOrAlt
   ) where
 
-import Prelude (pure, ($))
+import Prelude (pure, (<<<))
 
 import Control.Alternative (class Alternative)
-import Data.Symbol (class IsSymbol, SProxy)
+import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Data.Variant (Variant)
 import Data.Variant (prj) as Variant
 import Record (get) as Record
+import Type.Proxying (class RLProxying, class SProxying)
 import Type.Row (class Cons, kind RowList)
-import Type.Row (RLProxy) as TypeRow
 
 class RGetOrAlt
   (f  :: # Type -> Type)
@@ -22,16 +22,27 @@ class RGetOrAlt
   | l -> r
   where
   rgetOrAlt
-    :: forall h r' v
+    :: forall h i r' v
      . Alternative h
     => Cons s v r' r
-    => TypeRow.RLProxy l
+    => RLProxying i l
+    => i l
     -> g s
     -> f r
     -> h v
 
-instance rgetOrAltRecord :: IsSymbol s => RGetOrAlt Record SProxy s l r where
-  rgetOrAlt _ s record = pure $ Record.get s record
+instance rgetOrAltRecord
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RGetOrAlt Record g s l r
+  where
+  rgetOrAlt _ _ = pure <<< Record.get (SProxy :: SProxy s)
 
-instance rgetOrAltVariant :: IsSymbol s => RGetOrAlt Variant SProxy s l r where
-  rgetOrAlt _ = Variant.prj
+instance rgetOrAltVariant
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RGetOrAlt Variant g s l r
+  where
+  rgetOrAlt _ _ = Variant.prj (SProxy :: SProxy s)

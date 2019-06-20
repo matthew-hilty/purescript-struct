@@ -7,7 +7,7 @@ import Data.Struct.Contract.GContract
   , gContract
   )
 import Type.Row (class RowToList, class Union)
-import Type.Row (RLProxy(RLProxy)) as TypeRow
+import Type.Row (RLProxy(RLProxy))
 
 contract
   :: forall f l0 l1 l2 p r0 r1 r2
@@ -19,6 +19,6 @@ contract
   => p (f r1) (f r2)
 contract =
   gContract
-    (TypeRow.RLProxy :: TypeRow.RLProxy l0)
-    (TypeRow.RLProxy :: TypeRow.RLProxy l1)
-    (TypeRow.RLProxy :: TypeRow.RLProxy l2)
+    (RLProxy :: RLProxy l0)
+    (RLProxy :: RLProxy l1)
+    (RLProxy :: RLProxy l2)

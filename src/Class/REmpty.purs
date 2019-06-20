@@ -3,7 +3,7 @@ module Data.Struct.REmpty
   , rempty
   ) where
 
-import Type.Row (RProxy(RProxy))
+import Type.Proxying (class RProxying, rProxy)
 
 class REmpty (f :: # Type -> Type) where
   rempty :: f ()
@@ -11,5 +11,5 @@ class REmpty (f :: # Type -> Type) where
 instance remptyRecord :: REmpty Record where
   rempty = {}
 
-instance remptyRProxy :: REmpty RProxy where
-  rempty = RProxy
+else instance remptyRProxying :: RProxying g () => REmpty g where
+  rempty = rProxy

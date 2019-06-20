@@ -5,8 +5,8 @@ module Data.Struct.RMatch
 
 import Data.Variant (class VariantMatchCases, Variant)
 import Data.Variant ( match) as Variant
+import Type.Proxying (class RLProxying)
 import Type.Row (class RowToList, class Union, kind RowList)
-import Type.Row (RLProxy) as TypeRow
 
 class RMatch
   (f  :: # Type -> Type)
@@ -23,10 +23,14 @@ class RMatch
   , l2 -> r2
   where
   rmatch
-    :: Union r1 () r2
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
-    -> TypeRow.RLProxy l2
+    :: forall h
+     . RLProxying h l0
+    => RLProxying h l1
+    => RLProxying h l2
+    => Union r1 () r2
+    => h l0
+    -> h l1
+    -> h l2
     -> f r0
     -> g r2
     -> v

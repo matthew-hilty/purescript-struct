@@ -9,8 +9,15 @@ import Data.Struct.RConst (class RConst, rconst)
 import Data.Struct.RDelete (class RDelete, rdelete)
 import Data.Struct.REmpty (class REmpty, rempty)
 import Data.Symbol (SProxy(SProxy))
-import Type.Row (class Cons, class Lacks, Cons, Nil, kind RowList)
-import Type.Row (RLProxy(RLProxy)) as TypeRow
+import Type.Proxying (class RLProxying)
+import Type.Row
+  ( class Cons
+  , class Lacks
+  , Cons
+  , Nil
+  , RLProxy(RLProxy)
+  , kind RowList
+  )
 
 class GContract
   (p  :: Type -> Type -> Type)
@@ -27,9 +34,13 @@ class GContract
   , l0 l1 -> l2
   where
   gContract
-    :: TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
-    -> TypeRow.RLProxy l2
+    :: forall g
+     . RLProxying g l0
+    => RLProxying g l1
+    => RLProxying g l2
+    => g l0
+    -> g l1
+    -> g l2
     -> p (f r1) (f r2)
 
 instance gContract_Nil_Nil_Nil
@@ -86,8 +97,10 @@ else instance gContract_Cons_Cons_Cons
         r2'
   where
   gContract l0 l1 l2' =
-      rdelete l2 l2' s0 <<< gContract l0' l1 l2
+      rdelete x2 x2' s0 <<< gContract x0' x1 x2
     where
-    l0' = TypeRow.RLProxy :: TypeRow.RLProxy l0'
-    l2 = TypeRow.RLProxy :: TypeRow.RLProxy (Cons s0 v0 (Cons s2' v2' l2''))
-    s0 = SProxy :: SProxy s0
+    x0' = RLProxy :: RLProxy l0'
+    x1  = RLProxy :: RLProxy (Cons s1 v1 l1')
+    x2' = RLProxy :: RLProxy (Cons s2' v2' l2'')
+    x2  = RLProxy :: RLProxy (Cons s0 v0 (Cons s2' v2' l2''))
+    s0  = SProxy  :: SProxy s0

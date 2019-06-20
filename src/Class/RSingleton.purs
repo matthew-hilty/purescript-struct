@@ -3,8 +3,9 @@ module Data.Struct.RSingleton
   , rsingleton
   ) where
 
-import Data.Symbol (class IsSymbol, SProxy)
+import Data.Symbol (class IsSymbol)
 import Data.Struct.Utils.Record (singleton)
+import Type.Proxying (class SProxying)
 import Type.Row (class ListToRow, Cons , Nil)
 
 class RSingleton
@@ -15,7 +16,9 @@ class RSingleton
   rsingleton :: forall r v. ListToRow (Cons s v Nil) r => g s -> v -> f r
 
 instance rsingletonRecord
-  :: IsSymbol s
-  => RSingleton Record SProxy s
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RSingleton Record g s
   where
   rsingleton = singleton

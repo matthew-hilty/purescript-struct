@@ -7,8 +7,8 @@ import Data.Variant (Variant)
 import Record (nub) as Record
 import Record.Builder (Builder)
 import Record.Builder (nub) as Builder
-import Type.Row (class Nub, RProxy(RProxy), kind RowList)
-import Type.Row (RLProxy) as TypeRow
+import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Row (class Nub, kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RNub
@@ -22,9 +22,12 @@ class RNub
   , l1 -> r1
   where
   rnub
-    :: Nub r0 r1
-    => TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    :: forall g
+     . Nub r0 r1
+    => RLProxying g l0
+    => RLProxying g l1
+    => g l0
+    -> g l1
     -> p (f r0) (f r1)
 
 instance rnubBuilder :: RNub Builder Record l0 r0 l1 r1 where
@@ -33,8 +36,11 @@ instance rnubBuilder :: RNub Builder Record l0 r0 l1 r1 where
 instance rnubRecord :: RNub Function Record l0 r0 l1 r1 where
   rnub _ _ = Record.nub
 
-instance rnubRProxy :: RNub Function RProxy l0 r0 l1 r1 where
-  rnub _ _ _ = RProxy
-
-instance rnubVariant :: RNub Function Variant l0 r0 l1 r1 where
+else instance rnubVariant :: RNub Function Variant l0 r0 l1 r1 where
   rnub _ _ = unsafeCoerce
+
+else instance rnubRProxying
+  :: RProxying f r1
+  => RNub Function f l0 r0 l1 r1
+  where
+  rnub _ _ _ = rProxy

@@ -8,16 +8,17 @@ import Prelude (mempty)
 
 import Data.List (List, (:))
 import Data.Tuple (Tuple(Tuple))
-import Type.Data.RowList (RLProxy(RLProxy)) -- Argonaut dependency
-import Type.Data.Symbol
-  ( class IsSymbol
-  , SProxy(SProxy)
-  , reflectSymbol
-  )
+import Type.Data.RowList (RLProxy(RLProxy))
+import Type.Data.Symbol (class IsSymbol, SProxy(SProxy), reflectSymbol)
+import Type.Proxying (class RLProxying)
 import Type.Row (class RowToList, Cons, Nil, kind RowList)
 
 class ReifyKeyAndValueSymbols (l :: RowList) where
-  reifyKeyAndValueSymbols' :: RLProxy l -> List (Tuple String String)
+  reifyKeyAndValueSymbols'
+    :: forall f
+     . RLProxying f l
+    => f l
+    -> List (Tuple String String)
 
 instance reifyKeyAndValueSymbolsNil :: ReifyKeyAndValueSymbols Nil where
   reifyKeyAndValueSymbols' = mempty

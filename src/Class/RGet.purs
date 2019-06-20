@@ -3,10 +3,10 @@ module Data.Struct.RGet
   , rget
   ) where
 
-import Data.Symbol (class IsSymbol, SProxy)
+import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Record (get) as Record
+import Type.Proxying (class RLProxying, class SProxying)
 import Type.Row (class Cons, kind RowList)
-import Type.Row (RLProxy) as TypeRow
 
 class RGet
   (f :: # Type -> Type)
@@ -16,7 +16,19 @@ class RGet
   (r :: # Type)
   | l -> r
   where
-  rget :: forall r' v. Cons s v r' r => TypeRow.RLProxy l -> g s -> f r -> v
+  rget
+    :: forall h r' v
+     . Cons s v r' r
+    => RLProxying h l
+    => h l
+    -> g s
+    -> f r
+    -> v
 
-instance rgetRecord :: IsSymbol s => RGet Record SProxy s l r where
-  rget _ = Record.get
+instance rgetRecord
+  :: ( IsSymbol s
+     , SProxying g s
+     )
+  => RGet Record g s l r
+  where
+  rget _ _ = Record.get (SProxy :: SProxy s)

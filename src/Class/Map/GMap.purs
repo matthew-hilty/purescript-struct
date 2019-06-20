@@ -8,8 +8,8 @@ import Prelude (class Category, class Semigroupoid, identity, (<<<))
 
 import Data.Struct (class RGet, class RModify, rget, rmodify)
 import Data.Symbol (class IsSymbol, SProxy(SProxy))
-import Type.Row (class Cons, Cons, Nil, kind RowList)
-import Type.Row (RLProxy(RLProxy)) as TypeRow
+import Type.Proxying (class RLProxying)
+import Type.Row (class Cons, Cons, Nil, RLProxy(RLProxy), kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class GMap
@@ -25,8 +25,11 @@ class GMap
   , l0 l1 -> r2
   where
   gMap
-    :: TypeRow.RLProxy l0
-    -> TypeRow.RLProxy l1
+    :: forall g
+     . RLProxying g l0
+    => RLProxying g l1
+    => g l0
+    -> g l1
     -> Record r0
     -> p (f r1) (f r2)
 
@@ -46,12 +49,15 @@ instance gMap_Cons
   => GMap p f (Cons s v l0') r0 l1 r1 r2
   where
   gMap l0 l1 record0 =
-      rmodify l2' l2 s (rget l0 s record0)
-        <<< (gMap l0' l1 record0')
+      rmodify x2' x2 s (rget x0 s record0)
+        <<< (gMap x0' x1 record0')
     where
-    l0' = TypeRow.RLProxy :: TypeRow.RLProxy l0'
-    l2' = TypeRow.RLProxy :: TypeRow.RLProxy l2'
-    l2 = TypeRow.RLProxy :: TypeRow.RLProxy l2
-    s = SProxy :: SProxy s
+    x0' = RLProxy :: RLProxy l0'
+    x0  = RLProxy :: RLProxy (Cons s v l0')
+    x1  = RLProxy :: RLProxy l1
+    x2' = RLProxy :: RLProxy l2'
+    x2  = RLProxy :: RLProxy l2
+    s   = SProxy  :: SProxy s
+
     record0' :: Record r0'
     record0' = unsafeCoerce record0

@@ -9,6 +9,7 @@ You can edit this file as you like.
     , "argonaut-codecs"
     , "console"
     , "effect"
+    , "proxying"
     , "record"
     , "record-extra"
     , "subcategory"

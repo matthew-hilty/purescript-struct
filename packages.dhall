@@ -157,6 +157,18 @@ let additions =
         ]
         "https://github.com/awakesecurity/purescript-precise-datetime.git"
         "v5.1.1"
+  , proxying =
+      mkPackage
+        [ "console"
+        , "effect"
+        , "generics-rep"
+        , "prelude"
+        , "test-unit"
+        , "typelevel-eval"
+        , "typelevel-prelude"
+        ]
+        "https://github.com/matthew-hilty/purescript-proxying.git"
+        "v0.1.0"
   , slug =
       mkPackage
         [ "argonaut-codecs"
