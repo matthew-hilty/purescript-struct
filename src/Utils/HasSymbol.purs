@@ -16,7 +16,7 @@ import Type.Row (Cons, Nil, kind RowList)
 
 class HasSymbol (l :: RowList) (s :: Symbol) (b :: Boolean) | l s -> b
 
-instance hasSymbol :: HasSymbol_ l s b True => HasSymbol l s b
+instance hasSymbol' :: HasSymbol_ l s b True => HasSymbol l s b
 
 class HasSymbol_
   (l :: RowList)

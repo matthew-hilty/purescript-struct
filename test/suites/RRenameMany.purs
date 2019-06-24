@@ -4,14 +4,13 @@ module Test.Suites.Data.Struct.RRenameMany
 
 import Prelude (discard, map, (<<<), ($))
 
-import Data.Struct.RRenameMany (rrenameMany)
-
 import Data.Argonaut.Core (Json)
 import Data.Argonaut.Decode (decodeJson)
 import Data.Either (Either(Left, Right))
 import Data.List ((:))
 import Data.List (List(Nil)) as List
 import Data.Maybe (Maybe(Just, Nothing))
+import Data.Struct.RenameMany (rrenameMany)
 import Data.Symbol (SProxy(SProxy))
 import Record.Builder (build)
 import Test.Unit (TestSuite, suite, test)

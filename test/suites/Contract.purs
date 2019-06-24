@@ -4,14 +4,14 @@ module Test.Suites.Data.Struct.Contract.Contract
 
 import Prelude (discard, pure, unit, ($))
 
-import Data.Struct.Contract.Contract (contract)
+import Data.Struct.Contract (contract)
 import Record.Builder (build)
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)
 
 suites :: TestSuite
 suites =
-  suite "Contract" do
+  suite "contract" do
     suite "Builder" do
       test "#0" do
         let input = {}

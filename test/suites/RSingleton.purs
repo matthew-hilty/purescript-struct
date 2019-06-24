@@ -2,7 +2,7 @@ module Test.Suites.Data.Struct.RSingleton
   ( suites
   ) where
 
-import Data.Struct.RSingleton (rsingleton)
+import Data.Struct.Singleton (rsingleton)
 import Data.Symbol (SProxy(SProxy))
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)

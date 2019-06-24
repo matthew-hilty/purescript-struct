@@ -2,15 +2,18 @@ module Test.Suites.Data.Struct.Map.Map
   ( suites
   ) where
 
-import Prelude (discard, (+), (*), (<<<), ($))
 
+import Prelude (discard, (+), (*), (<>), (<<<), ($))
+
+import Data.Struct.Map (map)
 import Data.Symbol (SProxy(SProxy))
+import Data.Variant (Variant, inj)
 import Record.Builder (build)
 import Record.Builder (insert, rename) as Builder
 import Record (insert, rename) as Record
-import Data.Struct.Map.Map (map)
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)
+import Type.Row (Cons, Nil, RLProxy(RLProxy))
 
 suites :: TestSuite
 suites =
@@ -258,3 +261,78 @@ suites =
                 <<< map { a0: \i -> i * 2, a2: \i -> i + 1 }
                 <<< map { a0: \i -> i * 2, a1: \i -> i + 1 }
         build f input `shouldEqual` { a0: 0, a1: 5, a2: 6, a3: 7 }
+
+    suite "Variant" do
+      test "#0" do
+        let l = RLProxy :: RLProxy (Cons "a" Int Nil)
+        let s = SProxy :: SProxy "a"
+        let value = 10
+        let input = inj s value :: Variant (a :: Int)
+        let f = map {}
+        f input `shouldEqual` input
+
+      test "#1" do
+        let l = RLProxy :: RLProxy (Cons "a" Int Nil)
+        let s = SProxy :: SProxy "a"
+        let value = 10
+        let input = inj s value :: Variant (a :: Int)
+        let f' i = i + 1
+        let f = map { a: f' }
+        let result = inj s (f' value) :: Variant (a :: Int)
+        f input `shouldEqual` result
+
+      test "#2" do
+        let l = RLProxy :: RLProxy (Cons "a0" Int (Cons "a1" Int Nil))
+        let s0 = SProxy :: SProxy "a0"
+        let value = 10
+        let input = inj s0 value :: Variant (a0 :: Int, a1 :: Int)
+        let f' i = i + 1
+        let f = map { a0: f' }
+        let result = inj s0 (f' value) :: Variant (a0 :: Int, a1 :: Int)
+        f input `shouldEqual` result
+
+      test "#3" do
+        let l = RLProxy :: RLProxy (Cons "a0" Int (Cons "a1" Int Nil))
+        let s0 = SProxy :: SProxy "a0"
+        let value = 10
+        let input = inj s0 value :: Variant (a0 :: Int, a1 :: Int)
+        let f' i = i + 1
+        let f = map { a1: f' }
+        f input `shouldEqual` input
+
+      test "#4" do
+        let l = RLProxy :: RLProxy (Cons "a0" Int (Cons "a1" Int Nil))
+        let s0 = SProxy :: SProxy "a0"
+        let value = 10
+        let input = inj s0 value :: Variant (a0 :: Int, a1 :: Int)
+        let f0 i = i + 10
+        let f1 i = i + 11
+        let f = map { a0: f0, a1: f1 }
+        let result = inj s0 (f0 value) :: Variant (a0 :: Int, a1 :: Int)
+        f input `shouldEqual` result
+
+      test "#5" do
+        let l = RLProxy :: RLProxy (Cons "a0" Int (Cons "a1" Int Nil))
+        let s0 = SProxy :: SProxy "a0"
+        let value = 10
+        let input = inj s0 value :: Variant (a0 :: Int, a1 :: Int)
+        let f0 i = i + 10
+        let f1 i = i + 11
+        let g0 i = i * 10
+        let g1 i = i * 11
+        let f = map { a0: f0, a1: f1 } <<< map { a0: g0, a1: g1 }
+        let result = inj s0 (f0 (g0 value)) :: Variant (a0 :: Int, a1 :: Int)
+        f input `shouldEqual` result
+
+      test "#6" do
+        let l = RLProxy :: RLProxy (Cons "a0" Int (Cons "a1" String Nil))
+        let s0 = SProxy :: SProxy "a0"
+        let value = 10
+        let input = inj s0 value :: Variant (a0 :: Int, a1 :: String)
+        let f0 i = i + 10
+        let f1 s = s <> s
+        let g0 i = i * 10
+        let g1 s = s <> s <> s
+        let f = map { a0: f0, a1: f1 } <<< map { a0: g0, a1: g1 }
+        let result = inj s0 (f0 (g0 value)) :: Variant (a0 :: Int, a1 :: String)
+        f input `shouldEqual` result
