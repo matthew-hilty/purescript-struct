@@ -168,7 +168,7 @@ let additions =
         , "typelevel-prelude"
         ]
         "https://github.com/matthew-hilty/purescript-proxying.git"
-        "v1.0.0"
+        "v1.0.1"
   , slug =
       mkPackage
         [ "argonaut-codecs"

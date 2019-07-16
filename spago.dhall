@@ -10,6 +10,7 @@ You can edit this file as you like.
     , "console"
     , "effect"
     , "proxying"
+    , "psci-support"
     , "record"
     , "record-extra"
     , "subcategory"
