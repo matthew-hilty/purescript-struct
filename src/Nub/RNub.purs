@@ -8,7 +8,8 @@ import Record (nub) as Record
 import Record.Builder (Builder)
 import Record.Builder (nub) as Builder
 import Type.Proxying (class RLProxying, class RProxying, rProxy)
-import Type.Row (class Nub, kind RowList)
+import Type.Row (class Nub)
+import Type.RowList (kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RNub

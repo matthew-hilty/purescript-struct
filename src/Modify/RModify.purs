@@ -17,7 +17,8 @@ import Type.Proxying
   , class SProxying
   , rProxy
   )
-import Type.Row (class Cons, kind RowList)
+import Type.Row (class Cons)
+import Type.RowList (kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RModify

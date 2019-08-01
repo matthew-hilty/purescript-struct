@@ -3,7 +3,8 @@ module Data.Struct.Delete.Delete
   ) where
 
 import Data.Struct.Delete.RDelete (class RDelete, rdelete)
-import Type.Row (class Cons, class Lacks, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Cons, class Lacks)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 delete
   :: forall f g l0 l1 p r0 r1 s v

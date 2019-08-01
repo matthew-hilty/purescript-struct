@@ -10,7 +10,8 @@ import Data.Struct.Get.RGet (class RGet, rget)
 import Data.Struct.Modify.RModify (class RModify, rmodify)
 import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Type.Proxying (class RLProxying)
-import Type.Row (class Cons, Cons, Nil, RLProxy(RLProxy), kind RowList)
+import Type.Row (class Cons)
+import Type.RowList (Cons, Nil, RLProxy(RLProxy), kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class GMap

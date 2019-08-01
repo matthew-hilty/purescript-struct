@@ -5,7 +5,7 @@ module Data.Struct.Compare.Compare
 import Prelude (Ordering)
 
 import Data.Struct.Compare.RCompare (class RCompare, rcompare)
-import Type.Row (class RowToList, RLProxy(RLProxy))
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 compare
   :: forall f l r

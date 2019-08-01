@@ -3,7 +3,8 @@ module Data.Struct.Modify.Modify
   ) where
 
 import Data.Struct.Modify.RModify (class RModify, rmodify)
-import Type.Row (class Cons, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Cons)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 modify
   :: forall f g l0 l1 p r r0 r1 s v0 v1

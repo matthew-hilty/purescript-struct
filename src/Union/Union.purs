@@ -3,7 +3,8 @@ module Data.Struct.Union.Union
   ) where
 
 import Data.Struct.Union.RUnion (class RUnion, runion)
-import Type.Row (class Union, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Union)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 union
   :: forall f l0 l1 l2 p r0 r1 r2

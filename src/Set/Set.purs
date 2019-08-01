@@ -3,7 +3,8 @@ module Data.Struct.Set.Set
   ) where
 
 import Data.Struct.Set.RSet (class RSet, rset)
-import Type.Row (class Cons, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Cons)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 set
   :: forall f g l0 l1 p r0 r1 r s v0 v1

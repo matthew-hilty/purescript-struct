@@ -11,7 +11,8 @@ import Data.Variant (Variant)
 import Data.Variant (prj) as Variant
 import Record (get) as Record
 import Type.Proxying (class RLProxying, class SProxying)
-import Type.Row (class Cons, kind RowList)
+import Type.Row (class Cons)
+import Type.RowList (kind RowList)
 
 class RGetOrAlt
   (f  :: # Type -> Type)

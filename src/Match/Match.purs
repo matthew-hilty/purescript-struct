@@ -3,7 +3,7 @@ module Data.Struct.Match.Match
   ) where
 
 import Data.Struct.Match.RMatch (class RMatch, rmatch)
-import Type.Row (class RowToList, RLProxy(RLProxy))
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 match
   :: forall f g l0 l1 r0 r1 v

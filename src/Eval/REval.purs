@@ -6,7 +6,7 @@ module Data.Struct.Eval.REval
 import Control.Subcategory.Constituency (class ObjectOf)
 import Control.Subcategory.Slackable (class Slackable, slacken)
 import Type.Proxying (class RLProxying)
-import Type.Row (kind RowList)
+import Type.RowList (kind RowList)
 
 class REval
   (p  :: Type -> Type -> Type)

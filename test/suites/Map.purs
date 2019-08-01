@@ -13,7 +13,7 @@ import Record.Builder (insert, rename) as Builder
 import Record (insert, rename) as Record
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)
-import Type.Row (Cons, Nil, RLProxy(RLProxy))
+import Type.RowList (Cons, Nil, RLProxy(RLProxy))
 
 suites :: TestSuite
 suites =

@@ -6,7 +6,8 @@ module Data.Struct.Expand.RExpand
 import Data.Variant (Variant)
 import Data.Variant (expand) as Variant
 import Type.Proxying (class RLProxying, class RProxying, rProxy)
-import Type.Row (class Union, kind RowList)
+import Type.Row (class Union)
+import Type.RowList (kind RowList)
 
 class RExpand
   (p  :: Type -> Type -> Type)

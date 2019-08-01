@@ -10,7 +10,7 @@ import Control.Subcategory.Functor.Parameterized.HasConst
   )
 import Control.Subcategory.Restrictable (class Restrictable)
 import Type.Proxying (class RLProxying)
-import Type.Row (kind RowList)
+import Type.RowList (kind RowList)
 
 class RConst
   (p  :: Type -> Type -> Type)

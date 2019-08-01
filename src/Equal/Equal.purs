@@ -3,7 +3,7 @@ module Data.Struct.Equal.Equal
   ) where
 
 import Data.Struct.Equal.REqual (class REqual, requal)
-import Type.Row (class RowToList, RLProxy(RLProxy))
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 equal
   :: forall f l r

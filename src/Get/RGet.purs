@@ -6,7 +6,8 @@ module Data.Struct.Get.RGet
 import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Record (get) as Record
 import Type.Proxying (class RLProxying, class SProxying)
-import Type.Row (class Cons, kind RowList)
+import Type.Row (class Cons)
+import Type.RowList (kind RowList)
 
 class RGet
   (f :: # Type -> Type)

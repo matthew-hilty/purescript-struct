@@ -3,7 +3,7 @@ module Data.Struct.Const.Const
   ) where
 
 import Data.Struct.Const.RConst (class RConst, rconst)
-import Type.Row (class RowToList, RLProxy(RLProxy))
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 const
   :: forall f l0 l1 p r0 r1

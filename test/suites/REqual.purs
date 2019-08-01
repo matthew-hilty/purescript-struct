@@ -7,7 +7,8 @@ import Prelude (discard, pure, unit, ($))
 import Data.Struct.Equal (requal)
 import Test.Unit (Test, TestSuite, suite, test)
 import Test.Unit.Assert (assert, assertFalse)
-import Type.Row (Cons, Nil, RLProxy(RLProxy), RProxy(RProxy))
+import Type.Row (RProxy(RProxy))
+import Type.RowList (Cons, Nil, RLProxy(RLProxy))
 
 shouldBeTrue :: Boolean -> Test
 shouldBeTrue = assert "Unsatisfied expectations"

@@ -8,7 +8,8 @@ import Record (delete) as Record
 import Record.Builder (Builder)
 import Record.Builder (delete) as Builder
 import Type.Proxying (class RLProxying, class RProxying, rProxy)
-import Type.Row (class Cons, class Lacks, kind RowList)
+import Type.Row (class Cons, class Lacks)
+import Type.RowList (kind RowList)
 
 class RDelete
   (p  :: Type -> Type -> Type)

@@ -2,11 +2,9 @@ module Data.Struct.Contract.Contract
   ( contract
   ) where
 
-import Data.Struct.Contract.GContract
-  ( class GContract
-  , gContract
-  )
-import Type.Row (class RowToList, class Union, RLProxy(RLProxy))
+import Data.Struct.Contract.GContract (class GContract, gContract)
+import Type.Row (class Union)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 contract
   :: forall f l0 l1 l2 p r0 r1 r2

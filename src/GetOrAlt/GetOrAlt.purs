@@ -4,7 +4,8 @@ module Data.Struct.GetOrAlt.GetOrAlt
 
 import Control.Alternative (class Alternative)
 import Data.Struct.GetOrAlt.RGetOrAlt (class RGetOrAlt, rgetOrAlt)
-import Type.Row (class Cons, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Cons)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 getOrAlt
   :: forall f g h l r r' s v

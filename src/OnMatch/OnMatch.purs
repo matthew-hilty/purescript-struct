@@ -3,7 +3,8 @@ module Data.Struct.OnMatch.OnMatch
   ) where
 
 import Data.Struct.OnMatch.ROnMatch (class ROnMatch, ronMatch)
-import Type.Row (class RowToList, class Union, RLProxy(RLProxy))
+import Type.Row (class Union)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 onMatch
   :: forall f g l0 l1 l2 l3 r0 r1 r2 r3 v

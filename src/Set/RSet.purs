@@ -18,7 +18,8 @@ import Type.Proxying
   , rProxy
   , reflectSymbol
   )
-import Type.Row (class Cons, kind RowList)
+import Type.Row (class Cons)
+import Type.RowList (kind RowList)
 
 class RSet
   (p  :: Type -> Type -> Type)

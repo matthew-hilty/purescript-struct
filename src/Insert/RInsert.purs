@@ -15,7 +15,8 @@ import Type.Proxying
   , class SProxying
   , rProxy
   )
-import Type.Row (class Cons, class Lacks, kind RowList)
+import Type.Row (class Cons, class Lacks)
+import Type.RowList (kind RowList)
 
 class RInsert
   (p  :: Type -> Type -> Type)

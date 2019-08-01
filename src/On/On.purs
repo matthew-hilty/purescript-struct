@@ -3,7 +3,8 @@ module Data.Struct.On.On
   ) where
 
 import Data.Struct.On.ROn (class ROn, ron)
-import Type.Row (class Cons, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Cons)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 on
   :: forall a b f g l0 l1 r0 r1 s

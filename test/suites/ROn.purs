@@ -9,7 +9,7 @@ import Data.Symbol (SProxy(SProxy))
 import Data.Variant (Variant, case_, default, inj)
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)
-import Type.Row (Cons, Nil, RLProxy(RLProxy))
+import Type.RowList (Cons, Nil, RLProxy(RLProxy))
 
 s0 = SProxy :: SProxy "a0"
 s1 = SProxy :: SProxy "a1"

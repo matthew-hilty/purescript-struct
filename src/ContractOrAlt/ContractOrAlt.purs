@@ -5,7 +5,8 @@ module Data.Struct.ContractOrAlt.ContractOrAlt
 import Control.Alternative (class Alternative)
 import Data.Struct.ContractOrAlt.RContractOrAlt (class RContractOrAlt, rcontractOrAlt)
 import Record.Extra (class Keys) as RecordExtra
-import Type.Row (class RowToList, class Union, RLProxy(RLProxy))
+import Type.Row (class Union)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 contractOrAlt
   :: forall f h l0 l1 p r r0 r1

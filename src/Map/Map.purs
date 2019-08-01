@@ -3,7 +3,7 @@ module Data.Struct.Map.Map
   ) where
 
 import Data.Struct.Map.RMap (class RMap, rmap)
-import Type.Row (class RowToList, RLProxy(RLProxy))
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 map
   :: forall f g l0 l1 p r0 r1 r2

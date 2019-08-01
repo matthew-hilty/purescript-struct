@@ -10,7 +10,8 @@ import Data.Symbol (SProxy(SProxy))
 import Data.Variant (Variant, inj)
 import Test.Unit (Test, TestSuite, suite, test)
 import Test.Unit.Assert (assert, shouldEqual)
-import Type.Row (Cons, Nil, RLProxy(RLProxy), RProxy(RProxy))
+import Type.Row (RProxy(RProxy))
+import Type.RowList (Cons, Nil, RLProxy(RLProxy))
 
 shouldBeTrue :: Boolean -> Test
 shouldBeTrue = assert "Unsatisfied expectations"

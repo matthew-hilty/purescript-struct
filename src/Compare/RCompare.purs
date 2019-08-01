@@ -7,7 +7,7 @@ import Prelude (Ordering)
 
 import Record.Extra (class OrdRecord, compareRecord) as RecordExtra
 import Type.Proxying (class RLProxying)
-import Type.Row (class RowToList, kind RowList)
+import Type.RowList (class RowToList, kind RowList)
 
 class RCompare
   (f :: # Type -> Type)

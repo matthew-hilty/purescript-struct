@@ -11,7 +11,8 @@ import Data.Variant (contract) as Variant
 import Data.Variant.Internal (class Contractable)
 import Record.Extra (class Keys, pick) as RecordExtra
 import Type.Proxying (class RLProxying, class RProxying, rProxy)
-import Type.Row (class ListToRow, class RowToList, class Union, kind RowList)
+import Type.Row (class Union)
+import Type.RowList (class ListToRow, class RowToList, kind RowList)
 
 class RContractOrAlt
   (p  :: Type -> Type -> Type)

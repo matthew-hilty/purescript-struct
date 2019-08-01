@@ -14,7 +14,7 @@ import Type.Data.Boolean
   )
 import Type.Data.RowList (RLProxy)
 import Type.Data.Symbol (class Equals)
-import Type.Row (Cons, Nil, kind RowList)
+import Type.RowList (Cons, Nil, kind RowList)
 
 class GRenameMany_
   (l0 :: RowList)

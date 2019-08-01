@@ -7,7 +7,7 @@ import Prelude (discard, negate, Ordering(EQ, GT, LT))
 import Data.Struct.Compare (rcompare)
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)
-import Type.Row (Cons, Nil, RLProxy(RLProxy))
+import Type.RowList (Cons, Nil, RLProxy(RLProxy))
 
 suites :: TestSuite
 suites =

@@ -8,7 +8,8 @@ import Record (union) as Record
 import Record.Builder (Builder, build)
 import Record.Builder (union) as Builder
 import Type.Proxying (class RLProxying, class RProxying, rProxy)
-import Type.Row (class Union, kind RowList)
+import Type.Row (class Union)
+import Type.RowList (kind RowList)
 
 class RUnion
   (p  :: Type -> Type -> Type)

@@ -10,14 +10,9 @@ import Data.Struct.Delete.RDelete (class RDelete, rdelete)
 import Data.Struct.Empty.REmpty (class REmpty, rempty)
 import Data.Symbol (SProxy(SProxy))
 import Type.Proxying (class RLProxying)
-import Type.Row
-  ( class Cons
-  , class Lacks
-  , Cons
-  , Nil
-  , RLProxy(RLProxy)
-  , kind RowList
-  )
+import Type.Row (class Cons, class Lacks)
+import Type.RowList (Cons, Nil, RLProxy(RLProxy), kind RowList)
+
 
 class GContract
   (p  :: Type -> Type -> Type)

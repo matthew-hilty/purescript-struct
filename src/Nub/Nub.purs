@@ -3,7 +3,8 @@ module Data.Struct.Nub.Nub
   ) where
 
 import Data.Struct.Nub.RNub (class RNub, rnub)
-import Type.Row (class Nub, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Nub)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 nub
   :: forall f l0 l1 p r0 r1

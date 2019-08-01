@@ -3,7 +3,7 @@ module Data.Struct.Eval.Eval
   ) where
 
 import Data.Struct.Eval.REval (class REval, reval)
-import Type.Row (class RowToList, RLProxy(RLProxy))
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 eval
   :: forall f l0 l1 p r0 r1

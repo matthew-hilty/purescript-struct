@@ -9,7 +9,7 @@ import Data.Variant (class VariantEqs, Variant)
 import Data.Variant.Internal (class VariantTags)
 import Record (class EqualFields, equal) as Record
 import Type.Proxying (class RLProxying, class RProxying)
-import Type.Row (class RowToList, kind RowList)
+import Type.RowList (class RowToList, kind RowList)
 
 class REqual
   (f :: # Type -> Type)

@@ -12,7 +12,7 @@ import Type.Data.Boolean
   , kind Boolean
   )
 import Type.Data.Symbol (class Equals)
-import Type.Row (Cons, Nil, kind RowList)
+import Type.RowList (Cons, Nil, kind RowList)
 
 class HasSymbolValue (l :: RowList) (s :: Symbol) (b :: Boolean) | l s -> b
 

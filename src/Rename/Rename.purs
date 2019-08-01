@@ -3,7 +3,8 @@ module Data.Struct.Rename.Rename
   ) where
 
 import Data.Struct.Rename.RRename (class RRename, rrename)
-import Type.Row (class Cons, class Lacks, class RowToList, RLProxy(RLProxy))
+import Type.Row (class Cons, class Lacks)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 rename
   :: forall f g l0 l1 p r r0 r1 s0 s1 v

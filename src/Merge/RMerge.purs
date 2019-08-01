@@ -8,7 +8,8 @@ import Record (merge) as Record
 import Record.Builder (Builder, build)
 import Record.Builder (merge) as Builder
 import Type.Proxying (class RLProxying)
-import Type.Row (class Nub, class Union, RProxy(RProxy), kind RowList)
+import Type.Row (class Nub, class Union, RProxy(RProxy))
+import Type.RowList (kind RowList)
 
 class RMerge
   (p  :: Type -> Type -> Type)

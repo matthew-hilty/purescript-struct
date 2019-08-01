@@ -6,7 +6,7 @@ module Data.Struct.Map.RMap
 import Data.Struct.Map.GMap (class GMap, gMap)
 import Data.Variant (Variant)
 import Type.Proxying (class RLProxying, class RProxying, rProxy)
-import Type.Row (kind RowList)
+import Type.RowList (kind RowList)
 
 class RMap
   (p  :: Type -> Type -> Type)

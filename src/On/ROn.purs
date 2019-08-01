@@ -7,7 +7,8 @@ import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Data.Variant (Variant)
 import Data.Variant (on) as Variant
 import Type.Proxying (class RLProxying, class SProxying)
-import Type.Row (class Cons, kind RowList)
+import Type.Row (class Cons)
+import Type.RowList (kind RowList)
 
 class ROn
   (f  :: # Type -> Type)

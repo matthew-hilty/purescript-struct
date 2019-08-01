@@ -8,7 +8,7 @@ import Data.Struct.DisjointUnion (rdisjointUnion)
 import Record.Builder (build)
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)
-import Type.Row (Cons, Nil, RLProxy(RLProxy))
+import Type.RowList (Cons, Nil, RLProxy(RLProxy))
 
 suites :: TestSuite
 suites =

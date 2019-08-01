@@ -3,7 +3,8 @@ module Data.Struct.Merge.Merge
   ) where
 
 import Data.Struct.Merge.RMerge (class RMerge, rmerge)
-import Type.Row (class Nub, class RowToList, class Union, RLProxy(RLProxy))
+import Type.Row (class Nub, class Union)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 merge
   :: forall f l0 l1 l2 p r0 r1 r2 r3

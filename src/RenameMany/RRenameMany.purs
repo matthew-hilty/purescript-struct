@@ -16,7 +16,7 @@ import Data.Struct.Utils.ReifyKeyAndValueSymbols
 import Data.Tuple (Tuple)
 import Record.Builder (Builder)
 import Type.Proxying (class RProxying, rProxy)
-import Type.Row (class ListToRow, class RowToList, kind RowList)
+import Type.RowList (class ListToRow, class RowToList, kind RowList)
 
 class RRenameMany
   (p  :: Type -> Type -> Type)

@@ -11,7 +11,7 @@ import Data.Tuple (Tuple(Tuple))
 import Type.Data.RowList (RLProxy(RLProxy))
 import Type.Data.Symbol (class IsSymbol, SProxy(SProxy), reflectSymbol)
 import Type.Proxying (class RLProxying)
-import Type.Row (class RowToList, Cons, Nil, kind RowList)
+import Type.RowList (class RowToList, Cons, Nil, kind RowList)
 
 class ReifyKeyAndValueSymbols (l :: RowList) where
   reifyKeyAndValueSymbols'

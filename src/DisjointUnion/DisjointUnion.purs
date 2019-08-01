@@ -3,7 +3,8 @@ module Data.Struct.DisjointUnion.DisjointUnion
   ) where
 
 import Data.Struct.DisjointUnion.RDisjointUnion (class RDisjointUnion, rdisjointUnion)
-import Type.Row (class Nub, class RowToList, class Union, RLProxy(RLProxy))
+import Type.Row (class Nub, class Union)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 disjointUnion
   :: forall f l0 l1 l2 p r0 r1 r2

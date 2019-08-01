@@ -3,7 +3,8 @@ module Data.Struct.Expand.Expand
   ) where
 
 import Data.Struct.Expand.RExpand (class RExpand, rexpand)
-import Type.Row (class RowToList, class Union, RLProxy(RLProxy))
+import Type.Row (class Union)
+import Type.RowList (class RowToList, RLProxy(RLProxy))
 
 expand
   :: forall f l0 l1 p r r0 r1

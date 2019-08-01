@@ -9,7 +9,7 @@ import Data.Symbol (SProxy(SProxy))
 import Data.Variant (Variant, inj)
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (shouldEqual)
-import Type.Row (Cons, Nil, RLProxy(RLProxy))
+import Type.RowList (Cons, Nil, RLProxy(RLProxy))
 
 l0
   :: RLProxy

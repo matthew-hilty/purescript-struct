@@ -7,7 +7,8 @@ import Record (disjointUnion) as Record
 import Record.Builder (Builder)
 import Record.Builder (disjointUnion) as Builder
 import Type.Proxying (class RLProxying, class RProxying, rProxy)
-import Type.Row (class Nub, class Union, kind RowList)
+import Type.Row (class Nub, class Union)
+import Type.RowList (kind RowList)
 
 class RDisjointUnion
   (p  :: Type -> Type -> Type)
