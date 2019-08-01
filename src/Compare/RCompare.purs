@@ -6,7 +6,6 @@ module Data.Struct.Compare.RCompare
 import Prelude (Ordering)
 
 import Record.Extra (class OrdRecord, compareRecord) as RecordExtra
-import Type.Proxying (class RLProxying)
 import Type.RowList (class RowToList, kind RowList)
 
 class RCompare
@@ -16,9 +15,8 @@ class RCompare
   | l -> r
   where
   rcompare
-    :: forall g
-     . RLProxying g l
-    => g l
+    :: forall (g :: RowList -> Type)
+     . g l
     -> f r
     -> f r
     -> Ordering

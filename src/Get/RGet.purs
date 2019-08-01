@@ -5,7 +5,7 @@ module Data.Struct.Get.RGet
 
 import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Record (get) as Record
-import Type.Proxying (class RLProxying, class SProxying)
+import Type.Proxying (class SProxying)
 import Type.Row (class Cons)
 import Type.RowList (kind RowList)
 
@@ -18,9 +18,8 @@ class RGet
   | l -> r
   where
   rget
-    :: forall h r' v
+    :: forall (h :: RowList -> Type) r' v
      . Cons s v r' r
-    => RLProxying h l
     => h l
     -> g s
     -> f r

@@ -10,7 +10,7 @@ import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Data.Variant (Variant)
 import Data.Variant (prj) as Variant
 import Record (get) as Record
-import Type.Proxying (class RLProxying, class SProxying)
+import Type.Proxying (class SProxying)
 import Type.Row (class Cons)
 import Type.RowList (kind RowList)
 
@@ -23,10 +23,9 @@ class RGetOrAlt
   | l -> r
   where
   rgetOrAlt
-    :: forall h i r' v
+    :: forall h (i :: RowList -> Type) r' v
      . Alternative h
     => Cons s v r' r
-    => RLProxying i l
     => i l
     -> g s
     -> f r

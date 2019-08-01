@@ -9,7 +9,6 @@ import Control.Subcategory.Functor.Parameterized.HasConst
   , const
   )
 import Control.Subcategory.Restrictable (class Restrictable)
-import Type.Proxying (class RLProxying)
 import Type.RowList (kind RowList)
 
 class RConst
@@ -23,10 +22,8 @@ class RConst
   , l1 -> r1
   where
   rconst
-    :: forall g
-     . RLProxying g l0
-    => RLProxying g l1
-    => g l0
+    :: forall (g :: RowList -> Type)
+     . g l0
     -> g l1
     -> f r0
     -> p (f r1) (f r0)

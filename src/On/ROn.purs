@@ -6,7 +6,7 @@ module Data.Struct.On.ROn
 import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Data.Variant (Variant)
 import Data.Variant (on) as Variant
-import Type.Proxying (class RLProxying, class SProxying)
+import Type.Proxying (class SProxying)
 import Type.Row (class Cons)
 import Type.RowList (kind RowList)
 
@@ -22,10 +22,8 @@ class ROn
   , l1 -> r1
   where
   ron
-    :: forall a b h
+    :: forall a b (h :: RowList -> Type)
      . Cons s a r0 r1
-    => RLProxying h l0
-    => RLProxying h l1
     => h l0
     -> h l1
     -> g s

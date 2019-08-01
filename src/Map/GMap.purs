@@ -9,7 +9,6 @@ import Prelude (class Category, class Semigroupoid, identity, (<<<))
 import Data.Struct.Get.RGet (class RGet, rget)
 import Data.Struct.Modify.RModify (class RModify, rmodify)
 import Data.Symbol (class IsSymbol, SProxy(SProxy))
-import Type.Proxying (class RLProxying)
 import Type.Row (class Cons)
 import Type.RowList (Cons, Nil, RLProxy(RLProxy), kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
@@ -27,10 +26,8 @@ class GMap
   , l0 l1 -> r2
   where
   gMap
-    :: forall g
-     . RLProxying g l0
-    => RLProxying g l1
-    => g l0
+    :: forall (g :: RowList -> Type)
+     . g l0
     -> g l1
     -> Record r0
     -> p (f r1) (f r2)

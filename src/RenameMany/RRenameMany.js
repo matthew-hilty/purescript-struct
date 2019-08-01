@@ -1,6 +1,5 @@
 "use strict";
 
-
 exports.unsafeRenameManyBuilder = function (tuples, record) {
   var count = tuples.length;
   for (var i = 0; i < count; i++) {

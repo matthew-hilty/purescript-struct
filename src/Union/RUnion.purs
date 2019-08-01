@@ -7,7 +7,7 @@ import Control.Subcategory.Restrictable (restrict)
 import Record (union) as Record
 import Record.Builder (Builder, build)
 import Record.Builder (union) as Builder
-import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Union)
 import Type.RowList (kind RowList)
 
@@ -25,11 +25,8 @@ class RUnion
   , l2 -> r2
   where
   runion
-    :: forall g
-     . RLProxying g l0
-    => RLProxying g l1
-    => RLProxying g l2
-    => Union r0 r1 r2
+    :: forall (g :: RowList -> Type)
+     . Union r0 r1 r2
     => g l0
     -> g l1
     -> g l2

@@ -9,7 +9,6 @@ import Data.Struct.Const.RConst (class RConst, rconst)
 import Data.Struct.Delete.RDelete (class RDelete, rdelete)
 import Data.Struct.Empty.REmpty (class REmpty, rempty)
 import Data.Symbol (SProxy(SProxy))
-import Type.Proxying (class RLProxying)
 import Type.Row (class Cons, class Lacks)
 import Type.RowList (Cons, Nil, RLProxy(RLProxy), kind RowList)
 
@@ -29,11 +28,8 @@ class GContract
   , l0 l1 -> l2
   where
   gContract
-    :: forall g
-     . RLProxying g l0
-    => RLProxying g l1
-    => RLProxying g l2
-    => g l0
+    :: forall (g :: RowList -> Type)
+     . g l0
     -> g l1
     -> g l2
     -> p (f r1) (f r2)

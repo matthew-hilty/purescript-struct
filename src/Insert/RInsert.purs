@@ -9,12 +9,7 @@ import Data.Variant (inj) as Variant
 import Record (insert) as Record
 import Record.Builder (Builder)
 import Record.Builder (insert) as Builder
-import Type.Proxying
-  ( class RLProxying
-  , class RProxying
-  , class SProxying
-  , rProxy
-  )
+import Type.Proxying (class RProxying, class SProxying, rProxy)
 import Type.Row (class Cons, class Lacks)
 import Type.RowList (kind RowList)
 
@@ -31,11 +26,9 @@ class RInsert
   , l1 -> r1
   where
   rinsert
-    :: forall h v
+    :: forall (h :: RowList -> Type) v
      . Cons s v r0 r1
     => Lacks s r0
-    => RLProxying h l0
-    => RLProxying h l1
     => h l0
     -> h l1
     -> g s

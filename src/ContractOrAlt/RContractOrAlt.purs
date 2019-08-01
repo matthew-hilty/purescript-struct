@@ -10,7 +10,7 @@ import Data.Variant (Variant)
 import Data.Variant (contract) as Variant
 import Data.Variant.Internal (class Contractable)
 import Record.Extra (class Keys, pick) as RecordExtra
-import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Union)
 import Type.RowList (class ListToRow, class RowToList, kind RowList)
 
@@ -25,10 +25,8 @@ class RContractOrAlt
   , l1 -> r1
   where
   rcontractOrAlt
-    :: forall g h r
+    :: forall (g :: RowList -> Type) h r
      . Alternative h
-    => RLProxying g l0
-    => RLProxying g l1
     => Union r1 r r0
     => g l0
     -> g l1

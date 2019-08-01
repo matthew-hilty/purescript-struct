@@ -9,12 +9,7 @@ import Data.Variant (inj, on) as Variant
 import Record (rename) as Record
 import Record.Builder (Builder)
 import Record.Builder (rename) as Builder
-import Type.Proxying
-  ( class RLProxying
-  , class RProxying
-  , class SProxying
-  , rProxy
-  )
+import Type.Proxying (class RProxying, class SProxying, rProxy)
 import Type.Row (class Cons, class Lacks)
 import Type.RowList (kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
@@ -33,15 +28,13 @@ class RRename
   , l1 -> r1
   where
   rrename
-    :: forall h r v
+    :: forall (h :: RowList -> Type) r v
      . Cons s0 v r r0
     => Cons s1 v r r1
     => Lacks s0 r
     => Lacks s0 r1
     => Lacks s1 r
     => Lacks s1 r0
-    => RLProxying h l0
-    => RLProxying h l1
     => h l0
     -> h l1
     -> g s0

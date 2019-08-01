@@ -5,7 +5,6 @@ module Data.Struct.Eval.REval
 
 import Control.Subcategory.Constituency (class ObjectOf)
 import Control.Subcategory.Slackable (class Slackable, slacken)
-import Type.Proxying (class RLProxying)
 import Type.RowList (kind RowList)
 
 class REval
@@ -19,10 +18,8 @@ class REval
   , l1 -> r1
   where
   reval
-    :: forall g
-     . RLProxying g l0
-    => RLProxying g l1
-    => g l0
+    :: forall (g :: RowList -> Type)
+     . g l0
     -> g l1
     -> p (f r0) (f r1)
     -> f r0
@@ -33,5 +30,6 @@ instance revalSlackable
      , ObjectOf p (f r1)
      , Slackable p
      )
-  => REval p f l0 r0 l1 r1 where
+  => REval p f l0 r0 l1 r1
+  where
   reval _ _ = slacken

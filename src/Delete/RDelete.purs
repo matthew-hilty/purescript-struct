@@ -7,7 +7,7 @@ import Data.Symbol (class IsSymbol, SProxy)
 import Record (delete) as Record
 import Record.Builder (Builder)
 import Record.Builder (delete) as Builder
-import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Cons, class Lacks)
 import Type.RowList (kind RowList)
 
@@ -24,11 +24,9 @@ class RDelete
   , l1 -> r1
   where
   rdelete
-    :: forall h v
+    :: forall (h :: RowList -> Type) v
      . Cons s v r1 r0
     => Lacks s r1
-    => RLProxying h l0
-    => RLProxying h l1
     => h l0
     -> h l1
     -> g s

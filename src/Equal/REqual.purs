@@ -8,7 +8,7 @@ import Prelude (eq)
 import Data.Variant (class VariantEqs, Variant)
 import Data.Variant.Internal (class VariantTags)
 import Record (class EqualFields, equal) as Record
-import Type.Proxying (class RLProxying, class RProxying)
+import Type.Proxying (class RProxying)
 import Type.RowList (class RowToList, kind RowList)
 
 class REqual
@@ -17,7 +17,7 @@ class REqual
   (r :: # Type)
   | l -> r
   where
-  requal :: forall g. RLProxying g l => g l -> f r -> f r -> Boolean
+  requal :: forall (g :: RowList -> Type). g l -> f r -> f r -> Boolean
 
 instance requalRecord
   :: ( Record.EqualFields l r

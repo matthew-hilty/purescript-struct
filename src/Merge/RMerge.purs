@@ -7,7 +7,6 @@ import Control.Subcategory.Restrictable (restrict)
 import Record (merge) as Record
 import Record.Builder (Builder, build)
 import Record.Builder (merge) as Builder
-import Type.Proxying (class RLProxying)
 import Type.Row (class Nub, class Union, RProxy(RProxy))
 import Type.RowList (kind RowList)
 
@@ -25,11 +24,8 @@ class RMerge
   , l2 -> r2
   where
   rmerge
-    :: forall g r3
+    :: forall (g :: RowList -> Type) r3
      . Nub r2 r3
-    => RLProxying g l0
-    => RLProxying g l1
-    => RLProxying g l2
     => Union r0 r1 r2
     => g l0
     -> g l1

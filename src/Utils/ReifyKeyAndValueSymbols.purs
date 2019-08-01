@@ -10,14 +10,12 @@ import Data.List (List, (:))
 import Data.Tuple (Tuple(Tuple))
 import Type.Data.RowList (RLProxy(RLProxy))
 import Type.Data.Symbol (class IsSymbol, SProxy(SProxy), reflectSymbol)
-import Type.Proxying (class RLProxying)
 import Type.RowList (class RowToList, Cons, Nil, kind RowList)
 
 class ReifyKeyAndValueSymbols (l :: RowList) where
   reifyKeyAndValueSymbols'
-    :: forall f
-     . RLProxying f l
-    => f l
+    :: forall (f :: RowList -> Type)
+     . f l
     -> List (Tuple String String)
 
 instance reifyKeyAndValueSymbolsNil :: ReifyKeyAndValueSymbols Nil where

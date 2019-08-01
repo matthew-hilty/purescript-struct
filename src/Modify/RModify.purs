@@ -11,12 +11,7 @@ import Data.Variant (inj, on) as Variant
 import Record (modify) as Record
 import Record.Builder (Builder)
 import Record.Builder (modify) as Builder
-import Type.Proxying
-  ( class RLProxying
-  , class RProxying
-  , class SProxying
-  , rProxy
-  )
+import Type.Proxying (class RProxying, class SProxying, rProxy)
 import Type.Row (class Cons)
 import Type.RowList (kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
@@ -34,11 +29,9 @@ class RModify
   , l1 -> r1
   where
   rmodify
-    :: forall h r v0 v1
+    :: forall (h :: RowList -> Type) r v0 v1
      . Cons s v0 r r0
     => Cons s v1 r r1
-    => RLProxying h l0
-    => RLProxying h l1
     => h l0
     -> h l1
     -> g s

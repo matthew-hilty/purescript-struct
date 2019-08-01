@@ -7,7 +7,7 @@ import Data.Variant (Variant)
 import Record (nub) as Record
 import Record.Builder (Builder)
 import Record.Builder (nub) as Builder
-import Type.Proxying (class RLProxying, class RProxying, rProxy)
+import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Nub)
 import Type.RowList (kind RowList)
 import Unsafe.Coerce (unsafeCoerce)
@@ -23,10 +23,8 @@ class RNub
   , l1 -> r1
   where
   rnub
-    :: forall g
+    :: forall (g :: RowList -> Type)
      . Nub r0 r1
-    => RLProxying g l0
-    => RLProxying g l1
     => g l0
     -> g l1
     -> p (f r0) (f r1)
