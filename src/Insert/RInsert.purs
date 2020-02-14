@@ -11,22 +11,22 @@ import Record.Builder (Builder)
 import Record.Builder (insert) as Builder
 import Type.Proxying (class RProxying, class SProxying, rProxy)
 import Type.Row (class Cons, class Lacks)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class RInsert
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
+  (f  :: Row Type -> Type)
   (g  :: Symbol -> Type)
   (s  :: Symbol)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rinsert
-    :: forall (h :: RowList -> Type) v
+    :: forall (h :: RowList Type -> Type) v
      . Cons s v r0 r1
     => Lacks s r0
     => h l0

@@ -8,21 +8,21 @@ import Data.Variant (Variant)
 import Data.Variant (on) as Variant
 import Type.Proxying (class SProxying)
 import Type.Row (class Cons)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class ROn
-  (f  :: # Type -> Type)
+  (f  :: Row Type -> Type)
   (g  :: Symbol -> Type)
   (s  :: Symbol)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   ron
-    :: forall a b (h :: RowList -> Type)
+    :: forall a b (h :: RowList Type -> Type)
      . Cons s a r0 r1
     => h l0
     -> h l1

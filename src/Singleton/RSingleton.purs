@@ -9,11 +9,11 @@ import Type.Proxying (class SProxying)
 import Type.Row (class Cons, class Lacks)
 
 class RSingleton
-  (f :: # Type -> Type)
+  (f :: Row Type -> Type)
   (g :: Symbol -> Type)
   (s :: Symbol)
   where
-  rsingleton :: forall r v. Cons s v () r => Lacks s () => g s -> v -> f r
+  rsingleton :: forall (r :: Row Type) (v :: Type). Cons s v () r => Lacks s (() :: Row Type) => g s -> v -> f r
 
 instance rsingletonRecord
   :: ( IsSymbol s

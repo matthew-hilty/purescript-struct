@@ -10,23 +10,23 @@ import Data.Struct.Get.RGet (class RGet, rget)
 import Data.Struct.Modify.RModify (class RModify, rmodify)
 import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Type.Row (class Cons)
-import Type.RowList (Cons, Nil, RLProxy(RLProxy), kind RowList)
+import Type.RowList (Cons, Nil, RLProxy(RLProxy), RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class GMap
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
-  (r2 :: # Type)
+  (f  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
+  (r2 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   , l0 l1 -> r2
   where
   gMap
-    :: forall (g :: RowList -> Type)
+    :: forall (g :: RowList Type -> Type)
      . g l0
     -> g l1
     -> Record r0

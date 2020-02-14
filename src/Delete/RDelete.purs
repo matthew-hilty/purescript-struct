@@ -9,22 +9,22 @@ import Record.Builder (Builder)
 import Record.Builder (delete) as Builder
 import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Cons, class Lacks)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class RDelete
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
+  (f  :: Row Type -> Type)
   (g  :: Symbol -> Type)
   (s  :: Symbol)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rdelete
-    :: forall (h :: RowList -> Type) v
+    :: forall (h :: RowList Type -> Type) v
      . Cons s v r1 r0
     => Lacks s r1
     => h l0

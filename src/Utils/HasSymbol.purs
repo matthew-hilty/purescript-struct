@@ -9,17 +9,16 @@ import Type.Data.Boolean
   , BProxy
   , False
   , True
-  , kind Boolean
   )
 import Type.Data.Symbol (class Equals)
-import Type.RowList (Cons, Nil, kind RowList)
+import Type.RowList (Cons, Nil, RowList)
 
-class HasSymbol (l :: RowList) (s :: Symbol) (b :: Boolean) | l s -> b
+class HasSymbol (l :: RowList Type) (s :: Symbol) (b :: Boolean) | l s -> b
 
 instance hasSymbol' :: HasSymbol_ l s b True => HasSymbol l s b
 
 class HasSymbol_
-  (l :: RowList)
+  (l :: RowList Type)
   (s :: Symbol)
   (b :: Boolean)
   (continue :: Boolean)

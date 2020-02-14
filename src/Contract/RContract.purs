@@ -7,20 +7,20 @@ import Data.Struct.Contract.GContract (class GContract)
 import Data.Struct.Contract.GContract (gContract) as Contract
 import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Union)
-import Type.RowList (class RowToList, RLProxy(RLProxy), kind RowList)
+import Type.RowList (class RowToList, RLProxy(RLProxy), RowList)
 
 class RContract
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (f  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rcontract
-    :: forall (g :: RowList -> Type) r
+    :: forall (g :: RowList Type -> Type) r
      . Union r1 r r0
     => g l0
     -> g l1

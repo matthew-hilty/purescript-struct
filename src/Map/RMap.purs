@@ -6,23 +6,23 @@ module Data.Struct.Map.RMap
 import Data.Struct.Map.GMap (class GMap, gMap)
 import Data.Variant (Variant)
 import Type.Proxying (class RProxying, rProxy)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class RMap
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (g  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
-  (r2 :: # Type)
+  (f  :: Row Type -> Type)
+  (g  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
+  (r2 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   , l0 l1 -> r2
   where
   rmap
-    :: forall (h :: RowList -> Type)
+    :: forall (h :: RowList Type -> Type)
      . h l0
     -> h l1
     -> g r0

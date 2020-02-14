@@ -8,23 +8,23 @@ import Record (merge) as Record
 import Record.Builder (Builder, build)
 import Record.Builder (merge) as Builder
 import Type.Row (class Nub, class Union, RProxy(RProxy))
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class RMerge
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
-  (l2 :: RowList)
-  (r2 :: # Type)
+  (f  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
+  (l2 :: RowList Type)
+  (r2 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   , l2 -> r2
   where
   rmerge
-    :: forall (g :: RowList -> Type) r3
+    :: forall (g :: RowList Type -> Type) r3
      . Nub r2 r3
     => Union r0 r1 r2
     => g l0

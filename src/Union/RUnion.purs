@@ -9,23 +9,23 @@ import Record.Builder (Builder, build)
 import Record.Builder (union) as Builder
 import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Union)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class RUnion
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
-  (l2 :: RowList)
-  (r2 :: # Type)
+  (f  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
+  (l2 :: RowList Type)
+  (r2 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   , l2 -> r2
   where
   runion
-    :: forall (g :: RowList -> Type)
+    :: forall (g :: RowList Type -> Type)
      . Union r0 r1 r2
     => g l0
     -> g l1
