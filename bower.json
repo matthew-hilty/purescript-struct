@@ -17,23 +17,23 @@
   ],
   "dependencies": {
     "purescript-console": "^4.4.0",
-    "purescript-effect": "^2.0.1",
-    "purescript-prelude": "^4.1.1",
+    "purescript-effect": "^2.0.0",
+    "purescript-prelude": "^4.1.0",
     "purescript-proxying": "^1.1.0",
-    "purescript-record": "^2.0.2",
-    "purescript-record-extra": "^3.0.1",
+    "purescript-record": "^2.0.0",
+    "purescript-record-extra": "^3.0.0",
     "purescript-subcategory": "^0.2.0",
-    "purescript-typelevel-prelude": "^5.0.2",
-    "purescript-variant": "^6.0.1"
+    "purescript-typelevel-prelude": "^5.0.0",
+    "purescript-variant": "^6.0.0"
   },
   "devDependencies": {
     "purescript-argonaut-codecs": "^7.0.0",
-    "purescript-argonaut-core": "^5.0.2",
+    "purescript-argonaut-core": "^5.0.0",
     "purescript-psci-support": "^4.0.0",
     "purescript-quickcheck": "^6.1.0",
     "purescript-test-unit": "^15.0.0"
   },
   "resolutions": {
-    "purescript-typelevel-prelude": "^5.0.2"
+    "purescript-typelevel-prelude": "^5.0.0"
   }
 }
