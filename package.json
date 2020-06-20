@@ -7,7 +7,6 @@
   "repository": "https://github.com/matthew-hilty/purescript-struct",
   "author": "matthew.hilty <hilty.matthew@gmail.com>",
   "license": "MIT",
-  "private": true,
   "devDependencies": {
     "bower": "^1.8.8",
     "pulp": "^13.0.0"
