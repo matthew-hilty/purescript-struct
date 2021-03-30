@@ -9,21 +9,21 @@ import Record.Builder (Builder)
 import Record.Builder (nub) as Builder
 import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Nub)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RNub
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (f  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rnub
-    :: forall (g :: RowList -> Type)
+    :: forall (g :: RowList Type -> Type)
      . Nub r0 r1
     => g l0
     -> g l1

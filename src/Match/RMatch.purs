@@ -6,21 +6,21 @@ module Data.Struct.Match.RMatch
 import Data.Variant (class VariantMatchCases, Variant)
 import Data.Variant ( match) as Variant
 import Type.Row (class Union)
-import Type.RowList (class RowToList, kind RowList)
+import Type.RowList (class RowToList, RowList)
 
 class RMatch
-  (f  :: # Type -> Type)
-  (g  :: # Type -> Type)
+  (f  :: Row Type -> Type)
+  (g  :: Row Type -> Type)
   (v  :: Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rmatch
-    :: forall (h :: RowList -> Type)
+    :: forall (h :: RowList Type -> Type)
      . h l0
     -> h l1
     -> f r0

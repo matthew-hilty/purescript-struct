@@ -9,15 +9,15 @@ import Data.Variant (class VariantEqs, Variant)
 import Data.Variant.Internal (class VariantTags)
 import Record (class EqualFields, equal) as Record
 import Type.Proxying (class RProxying)
-import Type.RowList (class RowToList, kind RowList)
+import Type.RowList (class RowToList, RowList)
 
 class REqual
-  (f :: # Type -> Type)
-  (l :: RowList)
-  (r :: # Type)
+  (f :: Row Type -> Type)
+  (l :: RowList Type)
+  (r :: Row Type)
   | l -> r
   where
-  requal :: forall (g :: RowList -> Type). g l -> f r -> f r -> Boolean
+  requal :: forall (g :: RowList Type -> Type). g l -> f r -> f r -> Boolean
 
 instance requalRecord
   :: ( Record.EqualFields l r

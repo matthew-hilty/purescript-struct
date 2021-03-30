@@ -10,25 +10,25 @@ import Data.Struct.Delete.RDelete (class RDelete, rdelete)
 import Data.Struct.Empty.REmpty (class REmpty, rempty)
 import Data.Symbol (SProxy(SProxy))
 import Type.Row (class Cons, class Lacks)
-import Type.RowList (Cons, Nil, RLProxy(RLProxy), kind RowList)
+import Type.RowList (Cons, Nil, RLProxy(RLProxy), RowList)
 
 
 class GContract
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
-  (l2 :: RowList)
-  (r2 :: # Type)
+  (f  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
+  (l2 :: RowList Type)
+  (r2 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   , l2 -> r2
   , l0 l1 -> l2
   where
   gContract
-    :: forall (g :: RowList -> Type)
+    :: forall (g :: RowList Type -> Type)
      . g l0
     -> g l1
     -> g l2

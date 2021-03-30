@@ -11,24 +11,24 @@ import Record.Builder (Builder)
 import Record.Builder (rename) as Builder
 import Type.Proxying (class RProxying, class SProxying, rProxy)
 import Type.Row (class Cons, class Lacks)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RRename
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
+  (f  :: Row Type -> Type)
   (g  :: Symbol -> Type)
   (s0 :: Symbol)
   (s1 :: Symbol)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rrename
-    :: forall (h :: RowList -> Type) r v
+    :: forall (h :: RowList Type -> Type) r v
      . Cons s0 v r r0
     => Cons s1 v r r1
     => Lacks s0 r

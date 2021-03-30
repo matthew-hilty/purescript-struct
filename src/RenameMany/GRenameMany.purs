@@ -10,16 +10,15 @@ import Type.Data.Boolean
   , class Not
   , False
   , True
-  , kind Boolean
   )
 import Type.Data.RowList (RLProxy)
 import Type.Data.Symbol (class Equals)
-import Type.RowList (Cons, Nil, kind RowList)
+import Type.RowList (Cons, Nil, RowList)
 
 class GRenameMany_
-  (l0 :: RowList)
-  (l1 :: RowList)
-  (l2 :: RowList)
+  (l0 :: RowList Type)
+  (l1 :: RowList Type)
+  (l2 :: RowList Type)
   (continue :: Boolean)
   | l0 l1 -> l2
   , l0 l2 -> l1
@@ -55,9 +54,9 @@ instance renameMany_Cons
         True
 
 class GRenameMany
-  (l0 :: RowList)
-  (l1 :: RowList)
-  (l2 :: RowList)
+  (l0 :: RowList Type)
+  (l1 :: RowList Type)
+  (l2 :: RowList Type)
   | l0 l1 -> l2
   , l0 l2 -> l1
 

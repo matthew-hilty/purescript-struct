@@ -12,20 +12,20 @@ import Data.Variant.Internal (class Contractable)
 import Record.Extra (class Keys, pick) as RecordExtra
 import Type.Proxying (class RProxying, rProxy)
 import Type.Row (class Union)
-import Type.RowList (class ListToRow, class RowToList, kind RowList)
+import Type.RowList (class ListToRow, class RowToList, RowList)
 
 class RContractOrAlt
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (f  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rcontractOrAlt
-    :: forall (g :: RowList -> Type) h r
+    :: forall (g :: RowList Type -> Type) h r
      . Alternative h
     => Union r1 r r0
     => g l0

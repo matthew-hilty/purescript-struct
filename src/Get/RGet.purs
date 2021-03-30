@@ -7,18 +7,18 @@ import Data.Symbol (class IsSymbol, SProxy(SProxy))
 import Record (get) as Record
 import Type.Proxying (class SProxying)
 import Type.Row (class Cons)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class RGet
-  (f :: # Type -> Type)
+  (f :: Row Type -> Type)
   (g :: Symbol -> Type)
   (s :: Symbol)
-  (l :: RowList)
-  (r :: # Type)
+  (l :: RowList Type)
+  (r :: Row Type)
   | l -> r
   where
   rget
-    :: forall (h :: RowList -> Type) r' v
+    :: forall (h :: RowList Type -> Type) r' v
      . Cons s v r' r
     => h l
     -> g s

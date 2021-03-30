@@ -13,23 +13,23 @@ import Record.Builder (Builder)
 import Record.Builder (modify) as Builder
 import Type.Proxying (class RProxying, class SProxying, rProxy)
 import Type.Row (class Cons)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 import Unsafe.Coerce (unsafeCoerce)
 
 class RModify
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
+  (f  :: Row Type -> Type)
   (g  :: Symbol -> Type)
   (s  :: Symbol)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   where
   rmodify
-    :: forall (h :: RowList -> Type) r v0 v1
+    :: forall (h :: RowList Type -> Type) r v0 v1
      . Cons s v0 r r0
     => Cons s v1 r r1
     => h l0

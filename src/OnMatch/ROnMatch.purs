@@ -6,27 +6,27 @@ module Data.Struct.OnMatch.ROnMatch
 import Data.Variant (class VariantMatchCases, Variant)
 import Data.Variant (onMatch) as Variant
 import Type.Row (class Union)
-import Type.RowList (class RowToList, kind RowList)
+import Type.RowList (class RowToList, RowList)
 
 class ROnMatch
-  (f  :: # Type -> Type)
-  (g  :: # Type -> Type)
+  (f  :: Row Type -> Type)
+  (g  :: Row Type -> Type)
   (v  :: Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
-  (l2 :: RowList)
-  (r2 :: # Type)
-  (l3 :: RowList)
-  (r3 :: # Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
+  (l2 :: RowList Type)
+  (r2 :: Row Type)
+  (l3 :: RowList Type)
+  (r3 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   , l2 -> r2
   , l3 -> r3
   where
   ronMatch
-    :: forall (h :: RowList -> Type)
+    :: forall (h :: RowList Type -> Type)
      . Union r1 r2 r3
     => h l0
     -> h l1

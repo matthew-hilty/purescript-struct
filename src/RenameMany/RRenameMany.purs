@@ -16,18 +16,18 @@ import Data.Struct.Utils.ReifyKeyAndValueSymbols
 import Data.Tuple (Tuple)
 import Record.Builder (Builder)
 import Type.Proxying (class RProxying, rProxy)
-import Type.RowList (class ListToRow, class RowToList, kind RowList)
+import Type.RowList (class ListToRow, class RowToList, RowList)
 
 class RRenameMany
   (p  :: Type -> Type -> Type)
-  (f  :: # Type -> Type)
-  (g  :: # Type -> Type)
-  (l0 :: RowList)
-  (r0 :: # Type)
-  (l1 :: RowList)
-  (r1 :: # Type)
-  (l2 :: RowList)
-  (r2 :: # Type)
+  (f  :: Row Type -> Type)
+  (g  :: Row Type -> Type)
+  (l0 :: RowList Type)
+  (r0 :: Row Type)
+  (l1 :: RowList Type)
+  (r1 :: Row Type)
+  (l2 :: RowList Type)
+  (r2 :: Row Type)
   | l0 -> r0
   , l1 -> r1
   , l2 -> r2

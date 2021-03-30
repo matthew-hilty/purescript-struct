@@ -12,18 +12,18 @@ import Data.Variant (prj) as Variant
 import Record (get) as Record
 import Type.Proxying (class SProxying)
 import Type.Row (class Cons)
-import Type.RowList (kind RowList)
+import Type.RowList (RowList)
 
 class RGetOrAlt
-  (f  :: # Type -> Type)
+  (f  :: Row Type -> Type)
   (g  :: Symbol -> Type)
   (s  :: Symbol)
-  (l :: RowList)
-  (r :: # Type)
+  (l :: RowList Type)
+  (r :: Row Type)
   | l -> r
   where
   rgetOrAlt
-    :: forall h (i :: RowList -> Type) r' v
+    :: forall h (i :: RowList Type -> Type) r' v
      . Alternative h
     => Cons s v r' r
     => i l

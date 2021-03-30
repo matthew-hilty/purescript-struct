@@ -6,16 +6,16 @@ module Data.Struct.Compare.RCompare
 import Prelude (Ordering)
 
 import Record.Extra (class OrdRecord, compareRecord) as RecordExtra
-import Type.RowList (class RowToList, kind RowList)
+import Type.RowList (class RowToList, RowList)
 
 class RCompare
-  (f :: # Type -> Type)
-  (l :: RowList)
-  (r :: # Type)
+  (f :: Row Type -> Type)
+  (l :: RowList Type)
+  (r :: Row Type)
   | l -> r
   where
   rcompare
-    :: forall (g :: RowList -> Type)
+    :: forall (g :: RowList Type -> Type)
      . g l
     -> f r
     -> f r

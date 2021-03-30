@@ -5,7 +5,7 @@ module Data.Struct.Empty.REmpty
 
 import Type.Proxying (class RProxying, rProxy)
 
-class REmpty (f :: # Type -> Type) where
+class REmpty (f :: Row Type -> Type) where
   rempty :: f ()
 
 instance remptyRecord :: REmpty Record where
